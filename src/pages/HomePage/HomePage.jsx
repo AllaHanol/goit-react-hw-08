@@ -1,7 +1,9 @@
-import { Link } from "react-router-dom";
 const HomePage = () => {
-  return (<Link to="/login" />
-)
-};
+  return (
+    <main>
+      <h1>Phonebook</h1>
+    </main>
+  );
+}
 
 export default HomePage;

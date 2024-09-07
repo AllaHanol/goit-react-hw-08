@@ -1,59 +1,41 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { instance } from "../auth/operations";
 
-export const fetchContacts =
-  createAsyncThunk(
-    "contacts/fetchAll",
-    async (_, thunkApi) => {
-      try {
-        const { data } =
-          await axios.get(
-            "https://connections-api.goit.global/",
-        );
+export const apiGetAllContacts = createAsyncThunk(
+  "contacts/getAll",
+  async (_, thunkApi) => {
+    try {
+      const { data } = await instance.get("contacts");
 
-        return data;
-      } catch (error) {
-        return thunkApi.rejectWithValue(
-          error.message,
-        );
-      }
-    },
-  );
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
 
-export const deleteContact =
-  createAsyncThunk(
-    "contacts/deleteContact",
-    async (id, thunkApi) => {
-      try {
-        const { data } =
-          await axios.delete(
-            `https://connections-api.goit.global/${id}`,
-          );
-        return data;
-      } catch (error) {
-        return thunkApi.rejectWithValue(
-          error.message,
-        );
-      }
-    },
-  );
+export const apiAddNewContact = createAsyncThunk(
+  "contacts/addNew",
+  async (contact, thunkApi) => {
+    try {
+      const { data } = await instance.post("contacts", contact);
 
-export const addContact =
-  createAsyncThunk(
-    "contacts/addContact",
-    async (contact, thunkApi) => {
-      try {
-        const { data } =
-          await axios.post(
-            "https://connections-api.goit.global/",
-            contact,
-          );
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);
 
-        return data;
-      } catch (error) {
-        return thunkApi.rejectWithValue(
-          error.message,
-        );
-      }
-    },
-  );
+export const apiDeleteContact = createAsyncThunk(
+  "contacts/delete",
+  async (contactId, thunkApi) => {
+    try {
+      const { data } = await instance.delete(`/contacts/${contactId}`);
+
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

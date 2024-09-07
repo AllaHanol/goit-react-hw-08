@@ -1,20 +1,7 @@
-import { Link } from "react-router-dom";
+import LoginForm from '../../components/LoginForm/LoginForm';
 
 const LoginPage = () => {
-  return (
-    <div>
-      <h1>Login</h1>
-
-      <p>
-        Or <br/>
-        <Link to="/register">
-          
-          Register
-        
-        </Link>
-      </p>
-    </div>
-  );
+  return <LoginForm />;
 };
 
 export default LoginPage;

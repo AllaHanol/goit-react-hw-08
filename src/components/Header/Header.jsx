@@ -4,16 +4,20 @@ import clsx from "clsx";
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAuthIsLoggedIn, selectAuthIsRefreshing, selectAuthUser } from '../../redux/auth/selectors';
-import { apiRefreshUser } from '../../redux/auth/operations';
+import { apiRefreshUser, apiLogout } from '../../redux/auth/operations';
+
 const Header = () => {
- const isLoggedIn = useSelector(selectAuthIsLoggedIn);
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectAuthIsLoggedIn);
   const isRefreshing = useSelector(selectAuthIsRefreshing);
   const user = useSelector(selectAuthUser);
 
-  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(apiRefreshUser());
   }, [dispatch]);
+  const onLogout = () => {
+    dispatch(apiLogout());
+  }
 
   if (isRefreshing) return <p>User is refreshing, please wait</p>;
     
@@ -30,22 +34,7 @@ const Header = () => {
           </NavLink>
           {isLoggedIn ? (
               <>
-              <NavLink
-                className={({ isActive }) =>
-                    clsx(css.link, isActive && css.active)
-            }
-            to="/posts"
-            >
-                Posts
-              </NavLink>
-              <NavLink
-                className={({ isActive }) =>
-                    clsx(css.link, isActive && css.active)
-            }
-            to="/context-example"
-            >
-                Context Example
-              </NavLink>
+             
               <NavLink
                 className={({ isActive }) =>
                     clsx(css.link, isActive && css.active)
@@ -54,11 +43,13 @@ const Header = () => {
             >
                 Contacts
               </NavLink>
-              <div>
+              <div className={css.user}>
                 <p>Hello, {user.name}!</p>
                 <p>Email: {user.email}</p>
               </div>
+              <button type='button' onClick={onLogout}>Logout</button>
             </>
+
           ) : (
               <>
               <NavLink
