@@ -31,7 +31,7 @@ export const apiRegister = createAsyncThunk(
     try {
       const { data } = await instance.post("users/signup", formData);
       setAuthHeders(data.token);
-      
+
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
