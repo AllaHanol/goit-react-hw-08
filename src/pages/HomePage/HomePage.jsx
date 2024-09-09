@@ -1,14 +1,13 @@
-// import SearchBox from "../../components/SearchBox/SearchBox";
-// import ContactsList from "../../components/ContactsList/ContactsList";
-
+import Hallo from '../../components/Hallo/Hallo';
 const HomePage = () => {
   
   return (
     <main>
-      <h1>Phonebook</h1>
+      <h1><Hallo/></h1>
       
     </main>
   );
 }
 
 export default HomePage;
+

@@ -1,10 +1,12 @@
 import AuthNav from '../AuthNav/AuthNav';
-import Header from '../Header/Header';
+import UserMenu from '../UserMenu/UserMenu';
 
 const AppBar = () => {
   return (
     <>
-      <Header />
+      
+      <UserMenu />
+      
       <AuthNav />
     </>
   );

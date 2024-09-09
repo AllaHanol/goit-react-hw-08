@@ -13,6 +13,8 @@ import {
 } from "../../redux/contacts/operations";
 import toast from "react-hot-toast";
 import AddContactForm from "../../components/AddContactForm/AddContactForm";
+// import SearchBox from "../../components/SearchBox/SearchBox";
+// import ContactList from "../../components/ContactList/ContactList";
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
@@ -46,11 +48,15 @@ const ContactsPage = () => {
 
   return (
     <div>
+      <><h2>Phonebook</h2></>
       <AddContactForm onAddContact={onAddContact} />
       {isLoading && <Loader />}
       {error !== null && (
         <p style={{ color: "red" }}>{error}. Please, try again later.</p>
       )}
+
+      {/* <SearchBox /> */}
+      {/* <ContactList/> */}
       <ul>
         {contacts?.length === 0 && <li>Contacts list is empty</li>}
         {Array.isArray(contacts) &&
@@ -70,3 +76,4 @@ const ContactsPage = () => {
 };
 
 export default ContactsPage;
+

@@ -1,12 +1,12 @@
 import { NavLink } from 'react-router-dom';
-import css from './Header.module.css';
+import css from './UserMenu.module.css';
 import clsx from "clsx";
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectAuthIsLoggedIn, selectAuthIsRefreshing, selectAuthUser } from '../../redux/auth/selectors';
 import { apiRefreshUser, apiLogout } from '../../redux/auth/operations';
 
-const Header = () => {
+const UserMenu = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectAuthIsLoggedIn);
   const isRefreshing = useSelector(selectAuthIsRefreshing);
@@ -77,7 +77,7 @@ const Header = () => {
 );
 }
 
-export default Header;
+export default UserMenu;
 
 // <>
 {/* <header className={css.header}>

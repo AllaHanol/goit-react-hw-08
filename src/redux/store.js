@@ -1,4 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { authReducer } from "./auth/slice";
+import { filtersReducer } from "./filters/slice";
+import { contactsReducer} from "./contacts/slice";
 
 import {
   persistStore,
@@ -12,13 +15,6 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-// import { profilesReducer } from "./profiles/profilesReducer";
-// import { postsReducer } from "./posts/posts.slice";
-import { authReducer } from "./auth/slice";
-import { filtersReducer } from "./filters/slice";
-import { contactsReducer} from "./contacts/slice";
-
-
 const authConfig = {
   key: "auth",
   storage,
@@ -27,8 +23,6 @@ const authConfig = {
 
 export const store = configureStore({
   reducer: {
-    // profiles: profilesReducer,
-    // posts: postsReducer,
     filter: filtersReducer,
     auth: persistReducer(authConfig, authReducer),
     contacts: contactsReducer,

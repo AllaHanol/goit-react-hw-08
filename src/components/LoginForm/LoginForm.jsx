@@ -8,13 +8,13 @@ import { selectAuthError } from "../../redux/auth/selectors";
 
 const LoginValidationSchema = Yup.object().shape({
   password: Yup.string()
-    .required("Пароль є обов'язковим")
-    .min(8, "Пароль має бути мінімум в 8 символи")
-    .max(100, "Пароль має бути меншим за 100 символів"),
+    .required("Password is required")
+    .min(8, " Password must be minimum 8 characters")
+    .max(100, "Password must be less than 100 characters"),
 
   email: Yup.string()
-    .email("Некоректна електронна адреса")
-    .required("Електронна адреса є обов'язковим"),
+    .email("Invalid email address")
+    .required("The email is mandatory"),
 });
 
 const LoginForm = () => {
@@ -38,7 +38,7 @@ const LoginForm = () => {
       {({ errors }) => (
         <Form className={css.form}>
           <label className={css.label}>
-            <span>Електронна адреса:</span>
+            <span>E-mail:</span>
             <Field className={css.field}
               type="text"
               name="email"
@@ -52,11 +52,11 @@ const LoginForm = () => {
           </label>
 
           <label className={css.label}>
-            <span>Пароль:</span>
+            <span>Passwort:</span>
             <Field className={css.field}
               type="password"
               name="password"
-              placeholder="Введіть свій пароль"
+              placeholder="Enter your password"
             />
             <ErrorMessage
               className={css.errorText}
@@ -70,7 +70,7 @@ const LoginForm = () => {
             className={css.submitBtn}
             type="submit"
           >
-            Залогінитися
+            Log In
           </button>
 
           {error && (

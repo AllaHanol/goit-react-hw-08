@@ -5,7 +5,7 @@ export const instance = axios.create({
   baseURL: "https://connections-api.goit.global/",
 });
 
-const setAuthHeders = (token) => {
+const setAuthHeaders = (token) => {
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -15,7 +15,7 @@ export const apiLogin = createAsyncThunk(
   async (formData, thunkApi) => {
     try {
       const { data } = await instance.post("users/login", formData);
-      setAuthHeders(data.token);
+      setAuthHeaders(data.token);
 
       return data;
 
@@ -30,7 +30,7 @@ export const apiRegister = createAsyncThunk(
   async (formData, thunkApi) => {
     try {
       const { data } = await instance.post("users/signup", formData);
-      setAuthHeders(data.token);
+      setAuthHeaders(data.token);
 
       return data;
     } catch (error) {
@@ -45,7 +45,7 @@ export const apiRefreshUser = createAsyncThunk(
     try {
       const state = thunkApi.getState();
       const token = state.auth.token;
-      setAuthHeders(token);
+      setAuthHeaders(token);
     
       const { data } = await instance.get("users/current");
 
@@ -71,7 +71,7 @@ export const apiLogout = createAsyncThunk(
   async (_, thunkApi) => {
     try {
       await instance.post("/users/logout");
-      setAuthHeders("");
+      setAuthHeaders("");
       
       return;
     } catch (error) {

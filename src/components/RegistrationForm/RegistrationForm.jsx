@@ -8,22 +8,23 @@ import { selectAuthError } from "../../redux/auth/selectors";
 
 const RegisterValidationSchema = Yup.object().shape({
   name: Yup.string()
-    .required("Ім'я користувача є обов'язковим")
-    .min(2, "Ім'я користувача має бути мінімум в 2 символи")
-    .max(100, "Ім'я користувача має бути меншим за 100 символів"),
+    .required('This field is mandatory')
+    .min(2, 'Too Short!')
+    .max(100, 'Must be 100 characters or less' ),
   password: Yup.string()
-    .required("Пароль є обов'язковим")
-    .min(8, "Пароль має бути мінімум в 8 символи")
-    .max(100, "Пароль має бути меншим за 100 символів"),
+    .required('This field is mandatory')
+    .min(8, 'Must be minimum 8 characters')
+    .max(100, 'Must be 100 characters or less'),
 
   email: Yup.string()
-    .email("Некоректна електронна адреса")
-    .required("Електронна адреса є обов'язковим"),
+    .email('Invalid email address')
+    .required('The email is mandatory'),
 });
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
   const error = useSelector(selectAuthError);
+  
   const INITIAL_VALUES = {
     name: "",
     email: "",
@@ -43,7 +44,7 @@ const RegisterForm = () => {
       {({ errors }) => (
         <Form className={css.form}>
           <label className={css.label}>
-            <span>Ім&apos;я користувача:</span>
+            <span>User Name:</span>
             <Field className={css.field} type="text" name="name" placeholder="Василь Василько" />
             <ErrorMessage
               className={css.errorText}
@@ -52,7 +53,7 @@ const RegisterForm = () => {
             />
           </label>
           <label className={css.label}>
-            <span>Електронна адреса:</span>
+            <span>E-mail:</span>
             <Field className={css.field}
               type="text"
               name="email"
@@ -66,11 +67,11 @@ const RegisterForm = () => {
           </label>
 
           <label className={css.label}>
-            <span>Пароль:</span>
+            <span>Passwort:</span>
             <Field className={css.field}
               type="password"
               name="password"
-              placeholder="Введіть свій пароль"
+              placeholder="Enter your password"
             />
             <ErrorMessage
               className={css.errorText}
@@ -84,7 +85,7 @@ const RegisterForm = () => {
             className={css.submitBtn}
             type="submit"
           >
-            Зареєструватися
+            To register
           </button>
           {error && (
             <p className={css.errorText}>Oops, some error occured... {error}</p>
@@ -92,7 +93,7 @@ const RegisterForm = () => {
         </Form>
       )}
     </Formik>
-  );
+  )
 };
 
 export default RegisterForm;
