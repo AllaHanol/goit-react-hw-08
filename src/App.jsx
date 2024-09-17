@@ -1,11 +1,11 @@
 import {Route, Routes} from 'react-router-dom'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './App.css'
 import { lazy,useEffect } from 'react'
 import Layout from './components/Layout/Layout'
 
 import { apiRefreshUser} from './redux/auth/operations'
-// import { selectAuthIsRefreshing } from './redux/auth/selectors';
+import { selectAuthIsRefreshing } from './redux/auth/selectors';
 import { RestrictedRoute } from './components/RestrictedRoute/RestrictedRouter'
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute'
 
@@ -15,7 +15,7 @@ const RegistrationPage = lazy(() => import('./pages/RegistrationPage/Registratio
 const ContactsPage = lazy(() => import( './pages/ContactsPage/ContactsPage'));
 function App() {
   const dispatch = useDispatch();
-  // const isRefreshing = useSelector(selectAuthIsRefreshing);
+  const isRefreshing = useSelector(selectAuthIsRefreshing);
   
 
   useEffect(() => {
@@ -23,10 +23,10 @@ function App() {
   }, [dispatch]);
   
 
-//   return isRefreshing ? (<b>User is refreshing, please wait</b>
-// ) : (
-  return (
-  //  <> 
+return isRefreshing ? (<b>User is refreshing, please wait</b>
+ ) : (
+  
+  
     <Layout>
     <Routes>
       <Route path='/' element={<HomePage />} />
@@ -35,7 +35,7 @@ function App() {
       <Route path='/register' element={<RestrictedRoute component={<RegistrationPage />}/>} />
     </Routes>
     </Layout> 
-// </>
+
   ); 
 };
 
