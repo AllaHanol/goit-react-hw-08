@@ -60,7 +60,7 @@ const contactsSlice = createSlice({
     state.error = action.payload;
   })
   .addCase(apiLogout.fulfilled, (state)=>{
-    state.items =[];
+    state.contacts =[];
     state.error = null;
     state.isLoading = false;
   }),
