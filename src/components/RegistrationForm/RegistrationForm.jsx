@@ -35,6 +35,8 @@ const RegisterForm = () => {
     dispatch(apiRegister(values));
   };
 
+  Form.reset();
+
   return (
     <Formik
       initialValues={INITIAL_VALUES}

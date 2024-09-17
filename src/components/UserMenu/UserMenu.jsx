@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { selectAuthIsLoggedIn, selectAuthIsRefreshing, selectAuthUser } from '../../redux/auth/selectors';
 import { apiRefreshUser, apiLogout } from '../../redux/auth/operations';
 
-const UserMenu = () => {
+export const UserMenu = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectAuthIsLoggedIn);
   const isRefreshing = useSelector(selectAuthIsRefreshing);
