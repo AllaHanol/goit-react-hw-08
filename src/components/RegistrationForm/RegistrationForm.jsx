@@ -35,7 +35,6 @@ const RegisterForm = () => {
     dispatch(apiRegister(values));
   };
 
-  Form.reset();
 
   return (
     <Formik
