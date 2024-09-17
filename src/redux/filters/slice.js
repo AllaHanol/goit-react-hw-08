@@ -18,5 +18,5 @@ export const filtersReducer =
   filtersSlice.reducer;
   export const selectFilterValue = (
     state,
-  ) => state.filters.name;
+  ) => state.name;
 
