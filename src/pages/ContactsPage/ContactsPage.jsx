@@ -1,26 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectUserContacts,
-  selectUserContactsError,
-  selectUserContactsIsLoading,
-} from "../../redux/contacts/selectors";
-import Loader from "../../components/Loader/Loader";
 import { useEffect } from "react";
-import {
-  apiAddNewContact,
-  apiDeleteContact,
-  apiGetAllContacts,
-} from "../../redux/contacts/operations";
-import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import ContactList from "../../components/ContactList/ContactList";
 import AddContactForm from "../../components/AddContactForm/AddContactForm";
-// import SearchBox from "../../components/SearchBox/SearchBox";
-// import ContactList from "../../components/ContactList/ContactList";
+import SearchBox from "../../components/SearchBox/SearchBox";
+import Loader from "../../components/Loader/Loader";
+
+import {apiGetAllContacts} from "../../redux/contacts/operations";
+import {selectUserContacts} from "../../redux/contacts/selectors";
+
+import toast  from "react-hot-toast";
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectUserContacts);
-  const isLoading = useSelector(selectUserContactsIsLoading);
-  const error = useSelector(selectUserContactsError);
+  const {contacts, isLoading, error} = useSelector(selectUserContacts);
+  
 
   useEffect(() => {
     dispatch(apiGetAllContacts())
@@ -30,33 +23,21 @@ const ContactsPage = () => {
       });
   }, [dispatch]);
 
-  const onAddContact = (contact) => {
-    dispatch(apiAddNewContact(contact))
-      .unwrap()
-      .then(() => {
-        toast.success("Contact added successfully🎉");
-      });
-  };
-
-  const onDeleteContact = (contactId) => {
-    dispatch(apiDeleteContact(contactId))
-      .unwrap()
-      .then(() => {
-        toast.success("Contact deleted successfully🎉");
-      });
-  };
 
   return (
     <div>
       <><h2>Phonebook</h2></>
-      <AddContactForm onAddContact={onAddContact} />
+    
       {isLoading && <Loader />}
-      {error !== null && (
-        <p style={{ color: "red" }}>{error}. Please, try again later.</p>
+      <AddContactForm />
+       {error !== null && (
+        <p style={{ color: "red" }}>{error} Please, try again later.</p>
       )}
 
-      {/* <SearchBox /> */}
-      {/* <ContactList/> */}
+      <SearchBox />
+      
+      {contacts?.length > 0 ? (<ContactList/>) : (<p>Contacts list is empty</p>) }
+      
       <ul>
         {contacts?.length === 0 && <li>Contacts list is empty</li>}
         {Array.isArray(contacts) &&
@@ -65,9 +46,6 @@ const ContactsPage = () => {
               <p>
                 <b>{contact.name}</b>: {contact.number}
               </p>
-              <button onClick={() => onDeleteContact(contact.id)} type="button">
-                ❌
-              </button>
             </li>
           ))}
       </ul>
