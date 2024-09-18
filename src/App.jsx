@@ -1,5 +1,5 @@
 import {Route, Routes} from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch , useSelector } from 'react-redux';
 import './App.css'
 import { lazy,useEffect } from 'react'
 import Layout from './components/Layout/Layout'
